@@ -9,6 +9,9 @@ import sys
 def print_colored_text(text, color_code):
     print(f"\033[{color_code}m" + text + "\033[0m")
 
+# Set to track seen HTTP requests
+seen_requests = set()
+
 # Function to capture and analyze packets
 def process_packet(packet):
     try:
@@ -16,6 +19,15 @@ def process_packet(packet):
         if packet.haslayer(http.HTTPRequest):
             host = packet[http.HTTPRequest].Host.decode('utf-8', errors='ignore')
             path = packet[http.HTTPRequest].Path.decode('utf-8', errors='ignore')
+            
+            # Create a unique identifier for the HTTP request (Host + Path)
+            request_id = f"{host}{path}"
+            
+            # Check if this request has been processed before
+            if request_id in seen_requests:
+                return  # Skip this packet if it's a duplicate
+            else:
+                seen_requests.add(request_id)
             
             # Print the Host and Path in yellow
             print_colored_text(f'[+] Host: {host}    Path: {path}', '33')
