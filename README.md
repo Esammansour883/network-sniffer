@@ -21,13 +21,15 @@ Before using the script, ensure you have the following:
    git clone https://github.com/Esammansour883/network-sniffer.git
    cd network-sniffer
 2. Install the required Python libraries:
-  ```bash
-  pip install scapy
+   ```bash
+   pip install scapy
 
 ## Usage
 To start ARP spoofing and packet sniffing, run the script with the following command:
-  ```bash
-  python network_sniffer.py -t <TARGET_IP> -r <ROUTER_IP> -i <INTERFACE>
+   ```bash
+   python network_sniffer.py -t <TARGET_IP> -r <ROUTER_IP> -i <INTERFACE>
+```
+
 ## Where:
 - `<TARGET_IP>`: IP address of the victim.  
 - `<ROUTER_IP>`: Gateway IP address.  
